@@ -58,7 +58,7 @@ function displayTimer() {
 
     timerRef.innerHTML = ` ${h} : ${m} : ${s}`;
 
-    if (s >= 5) {
+    if ( >= 5) {
         overtimeDisplayTimer();
     }
     saveData();
