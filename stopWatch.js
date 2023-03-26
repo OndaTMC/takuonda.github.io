@@ -1,13 +1,13 @@
 let [milliseconds, seconds, minutes, hours] = [0, 0, 0, 0];
-let [OvertimeMilliseconds, OvertimeSeconds, OvertimeMinutes, OvertimeHours] = [0, 0, 0, 0];
+let [overtimeMilliseconds, overtimeSeconds, overtimeMinutes, overtimeHours] = [0, 0, 0, 0];
 let timerRef = document.querySelector('.timerDisplay');
 let overTimeRef = document.querySelector(`.overTimeDisplay`);
 let int = null;
 
 document.getElementById('startTimer').addEventListener('click', () => {
-    // if (int !== null) {
-    //     clearInterval(int);
-    // }
+    if (int !== null) {
+        clearInterval(int);
+    }
     int = setInterval(displayTimer, 10);
     saveData();
     showTime();
@@ -27,7 +27,7 @@ document.getElementById('resetTimer').addEventListener('click', () => {
 
 document.getElementById('overtimeReset').addEventListener('click', () => {
     clearInterval(int);
-    [OvertimeMilliseconds, OvertimeSeconds, OvertimeMinutes, OvertimeHours] = [0, 0, 0, 0];
+    [overtimeMilliseconds, overtimeSeconds, overtimeMinutes, overtimeHours] = [0, 0, 0, 0];
     overTimeRef.innerHTML = '00 : 00 : 00';
     saveData();
 });
@@ -58,34 +58,34 @@ function displayTimer() {
 
     timerRef.innerHTML = ` ${h} : ${m} : ${s}`;
 
-    if ( >= 8) {
+    if (s >= 5) {
         overtimeDisplayTimer();
     }
-saveData();
+    saveData();
 }
 
 function overtimeDisplayTimer() {
-    OvertimeMilliseconds += 10;
+    overtimeMilliseconds += 10;
 
-    if (OvertimeMilliseconds == 1000) {
-        OvertimeMilliseconds = 0;
-        OvertimeSeconds++;
+    if (overtimeMilliseconds == 1000) {
+        overtimeMilliseconds = 0;
+        overtimeSeconds++;
 
-        if (OvertimeSeconds == 60) {
-            OvertimeSeconds = 0;
-            OvertimeMinutes++;
+        if (overtimeSeconds == 60) {
+            overtimeSeconds = 0;
+            overtimeMinutes++;
 
-            if (OvertimeMinutes == 60) {
-                OvertimeMinutes = 0;
-                OvertimeHours++;
+            if (overtimeMinutes == 60) {
+                overtimeMinutes = 0;
+                overtimeHours++;
             }
         }
     }
 
 
-    let h = OvertimeHours < 10 ? "0" + OvertimeHours : OvertimeHours;
-    let m = OvertimeMinutes < 10 ? "0" + OvertimeMinutes : OvertimeMinutes;
-    let s = OvertimeSeconds < 10 ? "0" + OvertimeSeconds : OvertimeSeconds;
+    let h = overtimeHours < 10 ? "0" + overtimeHours : overtimeHours;
+    let m = overtimeMinutes < 10 ? "0" + overtimeMinutes : overtimeMinutes;
+    let s = overtimeSeconds < 10 ? "0" + overtimeSeconds : overtimeSeconds;
 
 
     overTimeRef.innerHTML = ` ${h} : ${m} : ${s}`;
@@ -96,17 +96,58 @@ function overtimeDisplayTimer() {
 function saveData() {
     localStorage.setItem("time", timerRef.innerHTML);
     localStorage.setItem("overtime", overTimeRef.innerHTML);
+    localStorage.setItem("milliseconds", milliseconds);
+    localStorage.setItem("seconds", seconds);
+    localStorage.setItem("minutes", minutes);
+    localStorage.setItem("hours", hours);
+    localStorage.setItem("overtimeMilliseconds", overtimeMilliseconds);
+    localStorage.setItem("overtimeSeconds", overtimeSeconds);
+    localStorage.setItem("overtimeMinutes", overtimeMinutes);
+    localStorage.setItem("overtimeHours", overtimeHours);
 }
 
 function showTime() {
     const savedTime = localStorage.getItem("time");
     const savedOvertime = localStorage.getItem("overtime");
+    const savedMilliseconds = localStorage.getItem("milliseconds");
+    const savedSeconds = localStorage.getItem("seconds");
+    const savedMinutes = localStorage.getItem("minutes");
+    const savedHours = localStorage.getItem("hours");
+    const savedOverTimeMilliseconds = localStorage.getItem("overtimeMilliseconds");
+    const savedOverTimeSeconds = localStorage.getItem("overtimeSeconds");
+    const savedOverTimeMinutes = localStorage.getItem("overtimeMinutes");
+    const savedOverTimeHours = localStorage.getItem("overtimeHours");
+
     if (savedTime !== null) {
         timerRef.innerHTML = savedTime;
     }
     if (savedOvertime !== null) {
         overTimeRef.innerHTML = savedOvertime;
     }
+    if (savedMilliseconds !== null) {
+        milliseconds = parseInt(savedMilliseconds);
+    }
+    if (savedSeconds !== null) {
+        seconds = parseInt(savedSeconds);
+    }
+    if (savedMinutes !== null) {
+        minutes = parseInt(savedMinutes);
+    }
+    if (savedHours !== null) {
+        hours = parseInt(savedHours);
+    }
+    if (savedOverTimeMilliseconds !== null) {
+        overtimeMilliseconds = parseInt(savedOverTimeMilliseconds);
+      }
+      if (savedOverTimeSeconds !== null) {
+        overtimeSeconds = parseInt(savedOverTimeSeconds);
+      }
+      if (savedOverTimeMinutes !== null) {
+        overtimeMinutes = parseInt(savedOverTimeMinutes);
+      }
+      if (savedOverTimeHours !== null) {
+        overtimeHours = parseInt(savedOverTimeHours);
+      }
 }
 
 showTime();
