@@ -10,12 +10,34 @@
 </head>
 
 <body>
+    <div class="box">
+        <div class="timerDisplay" id="timerDisplay">
+            00 : 00 : 00
+        </div>
+        <div class="overTime">
+            <select name="term" id="term" class="term">
+                <option value="today" class="option">Today</option>
+                <option value="aMonth" class="option">A Month</option>
+                <option value="aYear" class="option">A Year</option>
+            </select>
+            <div class="overTimeDisplay" id="overTimeDisplay">
+                00 : 00 : 00
+            </div>
+            <button class="buttons" id="overtimeReset">Reset overtime</button>
+        </div>
+            <div class="buttons" id="stopWatchButtons">
+            <button id="pauseTimer">Pause</button>
+            <button id="startTimer">Start</button>
+            <button id="resetTimer">Reset</button>
+        </div>
+    </div>
+
     <div class="container">
         <div class="todo-app">
             <h2>My ToDo List</h2>
             <div class="row">
                 <input type="text" id="input-box" placeholder="タスクを追加する">
-                <button onclick="addTask()">追加</button>
+                <button onclick="addTask()">ADD</button>
             </div>
             <ul id="list-container">
                 <!-- <li class="checked">Task 1</li>
