@@ -57,7 +57,7 @@ function displayTimer() { //タイマーの関数を宣言
 
     timerRef.innerHTML = ` ${h} : ${m} : ${s}`; //  ディスプレイに経過時間を表示
 
-    if (s >= 8) { //8時間以上経過した場合はovertimeDisplayTimer関数を実行
+    if (h >= 8) { //8時間以上経過した場合はovertimeDisplayTimer関数を実行
         overtimeDisplayTimer();
     }
     saveTime();
